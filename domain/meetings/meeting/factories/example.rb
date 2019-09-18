@@ -6,8 +6,7 @@ module LeanCoffee
           class Example
             def self.factory
               LeanCoffee::Domain::Meetings::Meeting.default(
-                allowed_votes: 5,
-                timebox_extension: 1,
+                allowed_votes: 5, 
                 phase: :voting,
                 time_boxes: {voting: 0, collection: 0, ordering: 0},
                 participants: [{ name: 'Angie' }, { name: 'Chris' }],

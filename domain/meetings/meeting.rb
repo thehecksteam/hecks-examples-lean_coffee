@@ -5,9 +5,9 @@ module LeanCoffee
         include Support::Root
         include Support::DomainObject
 
-        attr_reader :id, :timebox_extension, :phase, :discussion, :timebox, :id
+        attr_reader :id, :phase, :discussion, :timebox, :id
 
-        def initialize(id: nil, timebox_extension:, phase: nil, participants:, discussion:, timebox:)
+        def initialize(id: nil, phase: nil, participants:, discussion:, timebox:)
           @id = id
           @phase = phase
           @participants = participants
@@ -21,7 +21,7 @@ module LeanCoffee
 
         private
 
-        attr_writer :id, :timebox_extension, :phase, :participants, :discussion, :timebox
+        attr_writer :id, :phase, :participants, :discussion, :timebox
       end
     end
   end

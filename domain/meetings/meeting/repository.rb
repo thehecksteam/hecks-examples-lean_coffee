@@ -26,7 +26,6 @@ module LeanCoffee
               self.class.to_s.gsub('::Repository', '')
             )
             domain_object = klass.default(meeting)
-            domain_object.test_invariants
             domain_object.tap(&:save)
           end
 
@@ -38,7 +37,6 @@ module LeanCoffee
 
           def save(meeting)
             domain_object = meeting
-            domain_object.test_invariants
             @objects[meeting.hash] = domain_object
 
             meeting.instance_eval do

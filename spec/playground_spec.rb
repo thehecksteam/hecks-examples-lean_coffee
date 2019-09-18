@@ -4,7 +4,6 @@ describe 'Playground' do
   let(:meeting) do
     LeanCoffee::Domain::Meetings::Meeting.default(
       allowed_votes: 5,
-      timebox_extension: 1,
       discussion: LeanCoffee::Domain::Meetings::Discussion.default,
       time_boxes: { voting: 0, collection: 0, ordering: 0 },
       participants: [{ name: 'Angie' }, { name: 'Chris' }]

@@ -2,11 +2,7 @@ require 'spec_helper'
 
 describe LeanCoffee::Domain::Meetings::Meeting do
   let(:meeting) do
-    described_class.default(
-      allowed_votes: 5,
-      time_boxes: { voting: 0, collection: 0, ordering: 0 },
-      participants: [{ name: 'Angie' }, { name: 'Chris' }]
-    )
+    described_class.example
   end
 
   let(:chris) do

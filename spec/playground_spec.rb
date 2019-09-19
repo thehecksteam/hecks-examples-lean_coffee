@@ -2,12 +2,7 @@ require 'spec_helper'
 
 describe 'Playground' do
   let(:meeting) do
-    LeanCoffee::Domain::Meetings::Meeting.default(
-      allowed_votes: 5,
-      discussion: LeanCoffee::Domain::Meetings::Discussion.default,
-      time_boxes: { voting: 0, collection: 0, ordering: 0 },
-      participants: [{ name: 'Angie' }, { name: 'Chris' }]
-    )
+    LeanCoffee::Domain::Meetings::Meeting.example
   end
 
   let(:chris) do
@@ -89,7 +84,7 @@ describe 'Playground' do
     expect { meeting.vote!(topic: topics[:lean_coffee], participant: chris) }
       .to raise_error 'In discussing_topic phase.'
 
-    sleep(0.001)
+    sleep(0.1)
 
     expect(meeting.phase).to eq :waiting_for_extension_vote
 

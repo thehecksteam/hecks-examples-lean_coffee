@@ -17,7 +17,7 @@ module LeanCoffee
                     )
                   end,
                   discussion: Discussion.default,
-                  timebox: Timebox.zeroed,
+                  timebox: args[:timebox].is_a?(Hash) ? Timebox.default(args[:timebox]) : args[:timebox],
                   phase: :waiting
                 )
               )

@@ -118,4 +118,12 @@ describe 'Playground' do
 
     meeting.save
   end
+
+  it 'has a build factory' do
+    expect(LeanCoffee::Domain::Meetings::Meeting.build(
+      discussion: {},
+      participants: [],
+      timebox: LeanCoffee::Domain::Meetings::Timebox.zeroed
+    ).timebox.voting_duration).to eq 0
+  end
 end

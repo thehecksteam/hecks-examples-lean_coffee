@@ -6,21 +6,7 @@ domain(:LeanCoffee) do
   email       'dev@lean_coffee.com'
   homepage    'http://www.example.com'
 
-  aggregate :Users do
-    head(:User) do
-      string :name
-      integer :remaining_votes
-      optional list(:topic_votes).as(:Topic)
-    end
-  end
-
   aggregate :Meetings do
-    entity(:Participant) do
-      integer :remaining_votes
-      optional list(:topic_votes).as(:Topic)
-      entity(:user).as(Users: :User)
-    end
-
     root :Meeting do
       optional string(:phase)
       list(:participants).as(:Participant)
@@ -29,9 +15,10 @@ domain(:LeanCoffee) do
 
       operations %i[
         AddTopic DiscussNextTopic KeepTalking MoveTopicToBottom
-        MoveTopicToTop OrderByVotes Save StartCollecting StartOrdering
-        StartDiscussing StartVoting VoteToKeepTalking VoteToStopTalking
-        Vote WaitForExtensionVote WaitForNextPhase AddParticipantToMeeting
+        MoveTopicToTop OrderByVotes Save
+        StartCollecting StartOrdering StartDiscussing StartVoting
+        VoteToKeepTalking VoteToStopTalking Vote WaitForExtensionVote
+        WaitForNextPhase
       ]
     end
 
@@ -41,6 +28,12 @@ domain(:LeanCoffee) do
       value(:ordering_duration)
       value(:topic_discussion_duration)
       value(:topic_extension_duration)
+    end
+
+    value(:Participant) do
+      string :name
+      integer :remaining_votes
+      optional list(:topic_votes).as(:Topic)
     end
 
     entity(:Discussion) do

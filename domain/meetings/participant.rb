@@ -10,7 +10,7 @@ module LeanCoffee
         def initialize(id: nil, remaining_votes:, topic_votes: [], user:)
           @id = id
           @remaining_votes = remaining_votes
-          @topic_votes = []
+          @topic_votes = topic_votes
           @user = user
         end
 

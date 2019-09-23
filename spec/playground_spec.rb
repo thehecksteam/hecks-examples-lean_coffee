@@ -12,6 +12,7 @@ describe 'Playground' do
 
   let(:chris) do
     LeanCoffee::Domain::Meetings::Participant.build(
+      topic_votes: [],
       user: LeanCoffee::Domain::Users::User.build(name: 'Chris').tap(&:save),
       remaining_votes: 5
     )
@@ -19,6 +20,7 @@ describe 'Playground' do
 
   let(:angie) do
     LeanCoffee::Domain::Meetings::Participant.build(
+      topic_votes: [],
       user: LeanCoffee::Domain::Users::User.build(name: 'Angie').tap(&:save),
       remaining_votes: 5
     )

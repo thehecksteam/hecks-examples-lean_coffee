@@ -14,7 +14,6 @@ module LeanCoffee
 
             def call
               topic = @topic
-              topic = @topic
               root.discussion.instance_eval do
                 @topics << topic
               end

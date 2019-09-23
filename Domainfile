@@ -7,17 +7,15 @@ domain(:LeanCoffee) do
   homepage    'http://www.example.com'
 
   aggregate :Users do
-    head(:User) do
+    root(:User) do
       string :name
-      integer :remaining_votes
-      optional list(:topic_votes).as(:Topic)
     end
   end
 
   aggregate :Meetings do
     entity(:Participant) do
       integer :remaining_votes
-      optional list(:topic_votes).as(:Topic)
+      optional list(:topic_votes).as(Meetings: :Topic)
       entity(:user).as(Users: :User)
     end
 
@@ -28,10 +26,10 @@ domain(:LeanCoffee) do
       value(:timebox).as(:Timebox)
 
       operations %i[
-        AddTopic DiscussNextTopic KeepTalking MoveTopicToBottom
-        MoveTopicToTop OrderByVotes Save StartCollecting StartOrdering
-        StartDiscussing StartVoting VoteToKeepTalking VoteToStopTalking
-        Vote WaitForExtensionVote WaitForNextPhase AddParticipantToMeeting
+        AddTopic DiscussNextTopic KeepTalking MoveTopicToBottom MoveTopicToTop
+        OrderByVotes StartCollecting StartOrdering StartDiscussing StartVoting
+        VoteToKeepTalking VoteToStopTalking Vote WaitForExtensionVote
+        WaitForNextPhase AddParticipantToMeeting
       ]
     end
 

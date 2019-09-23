@@ -2,16 +2,23 @@ require 'spec_helper'
 
 describe LeanCoffee::Domain::Meetings::Meeting do
   let(:meeting) do
-    described_class.example
+    described_class.example(participants: [chris, angie])
   end
 
   let(:chris) do
-    meeting.find_participant(name: 'Chris')
+    LeanCoffee::Domain::Meetings::Participant.build(
+      user: LeanCoffee::Domain::Users::User.build(name: 'Chris').tap(&:save),
+      remaining_votes: 5
+    )
   end
 
   let(:angie) do
-    meeting.find_participant(name: 'Angie')
+    LeanCoffee::Domain::Meetings::Participant.build(
+      user: LeanCoffee::Domain::Users::User.build(name: 'Angie').tap(&:save),
+      remaining_votes: 5
+    )
   end
+
 
   let(:lean_coffee_topic) do
     LeanCoffee::Domain::Meetings::Topic.new(
@@ -28,7 +35,7 @@ describe LeanCoffee::Domain::Meetings::Meeting do
   describe '.example' do
     it 'Needs timeboxes' do
       expect(
-        LeanCoffee::Domain::Meetings::Meeting.example
+        LeanCoffee::Domain::Meetings::Meeting.example(participants: [chris, angie])
       ).to be
     end
   end

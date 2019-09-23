@@ -1,16 +1,27 @@
 require 'spec_helper'
 
 describe 'Playground' do
+
+
+
   let(:meeting) do
-    LeanCoffee::Domain::Meetings::Meeting.example
+    LeanCoffee::Domain::Meetings::Meeting.example(
+      participants: [chris, angie]
+    )
   end
 
   let(:chris) do
-    meeting.find_participant(name: 'Chris')
+    LeanCoffee::Domain::Meetings::Participant.build(
+      user: LeanCoffee::Domain::Users::User.build(name: 'Chris').tap(&:save),
+      remaining_votes: 5
+    )
   end
 
   let(:angie) do
-    meeting.find_participant(name: 'Angie')
+    LeanCoffee::Domain::Meetings::Participant.build(
+      user: LeanCoffee::Domain::Users::User.build(name: 'Angie').tap(&:save),
+      remaining_votes: 5
+    )
   end
 
   let(:topics) {
@@ -23,10 +34,6 @@ describe 'Playground' do
       )
     }
   }
-
-  it 'Example' do
-    LeanCoffee::Domain::Meetings::Meeting.example
-  end
 
   it 'Play a game' do
     # Collecting #######################

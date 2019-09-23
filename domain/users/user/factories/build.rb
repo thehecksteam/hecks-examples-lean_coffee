@@ -1,7 +1,7 @@
 module LeanCoffee
   module Domain
-    module Meetings
-      class Discussion
+    module Users
+      class User
         module Factories
           # Recursively build domain objects.  Used in the domain as the primary
           # factory. The results of #build can be passed to any other build
@@ -20,11 +20,8 @@ module LeanCoffee
             end
 
             def self.new_domain_object(args)
-              Discussion.new(
+              User.new(
                 args.merge(
-                  discussing: Discussion.build(args[:discussing]),
-                  discussed: Discussion.build(args[:discussed]),
-                  topics: Topic.build(args[:topics]),
                 )
               )
             end

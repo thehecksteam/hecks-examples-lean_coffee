@@ -3,14 +3,28 @@ module LeanCoffee
     module Meetings
       class Participant
         module Factories
+          # Recursively build domain objects.  Used in the domain as the primary
+          # factory. The results of #build can be passed to any other build
+          # factory in the domain. Takes a hash, or a list of hashes.  If a list
+          # is given, it will return a list of the instantiated objects
           class Build
-            def self.factory(args)
+            def self.factory(args=nil)
+              return args if args.nil?
+              return args unless args.is_a?(Hash)
+
+              [args].flatten.map do |domain_object_args|
+                new_domain_object(domain_object_args)
+              end.tap do |result|
+                return result.first unless args.is_a?(Array)
+              end
+            end
+
+            def self.new_domain_object(args)
               Participant.new(
-                name: args[:name],
-                remaining_votes: args[:remaining_votes],
-                topic_votes: (args[:topic_votes] || []).map do |object|
-                  object.is_a?(Hash) ? Topic.build(object) : object
-                end,
+                args.merge(
+                  topic_votes: Domain::Meetings::Topic.build(args[:topic_votes]),
+                  user: Domain::Users::User.build(args[:user]),
+                )
               )
             end
           end

@@ -6,7 +6,7 @@ module LeanCoffee
           class Example
             def self.factory(participants:)
               LeanCoffee::Domain::Meetings::Meeting.build(
-                phase: :voting,
+                phase: :waiting,
                 discussion: Discussion.new,
                 timebox: {
                   voting_duration: 0,

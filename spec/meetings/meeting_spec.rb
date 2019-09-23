@@ -148,6 +148,15 @@ describe LeanCoffee::Domain::Meetings::Meeting do
     end
   end
 
+  describe '#addParticipantToMeeting' do
+    it do
+      user = LeanCoffee::Domain::Users::User.build(name: 'Fred').tap(&:save)
+      meeting.add_participant_to_meeting!(user: user)
+
+      expect(meeting.participants.count).to eq 3
+    end
+  end
+
   describe '#start_discussing!' do
     before do
       meeting.start_collecting!

@@ -13,7 +13,7 @@ domain(:LeanCoffee) do
   end
 
   aggregate :Meetings do
-    entity(:Participant) do
+    value(:Participant) do
       integer :remaining_votes
       optional list(:topic_votes).as(Meetings: :Topic)
       entity(:user).as(Users: :User)

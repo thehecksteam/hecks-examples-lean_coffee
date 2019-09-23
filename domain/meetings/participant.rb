@@ -5,10 +5,9 @@ module LeanCoffee
         
         include Support::DomainObject
 
-        attr_reader :id, :remaining_votes, :user, :id
+        attr_reader :remaining_votes, :user
 
-        def initialize(id: nil, remaining_votes:, topic_votes: [], user:)
-          @id = id
+        def initialize(remaining_votes:, topic_votes: [], user:)
           @remaining_votes = remaining_votes
           @topic_votes = topic_votes
           @user = user
@@ -20,7 +19,7 @@ module LeanCoffee
 
         private
 
-        attr_writer :id, :remaining_votes, :topic_votes, :user
+        attr_writer :remaining_votes, :topic_votes, :user
       end
     end
   end

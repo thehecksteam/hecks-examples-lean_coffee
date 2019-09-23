@@ -21,7 +21,6 @@ describe LeanCoffee::Domain::Meetings::Meeting do
     )
   end
 
-
   let(:lean_coffee_topic) do
     LeanCoffee::Domain::Meetings::Topic.new(
       value: 'lean coffee', votes: 0, timebox: LeanCoffee::Domain::Meetings::TopicTimebox.zeroed

@@ -41,14 +41,10 @@ describe 'Playground' do
     meeting.add_topic!(topics[:lean_coffee])
     meeting.add_topic!(topics[:retrospective])
     meeting.wait_for_next_phase!
-    expect(meeting.phase).to eq :waiting
 
     # Voting for Topics #######################
 
     meeting.start_voting!
-
-    expect(meeting.phase).to eq :voting
-
     meeting.vote!(topic: topics[:lean_coffee], participant: chris)
     meeting.vote!(topic: topics[:retrospective], participant: chris)
     meeting.vote!(topic: topics[:retrospective], participant: chris)
@@ -59,7 +55,6 @@ describe 'Playground' do
     # Ordering #######################
 
     meeting.start_ordering!
-
     meeting.order_by_votes!
 
     expect(meeting.discussion.topics.first).to eq topics[:retrospective]
@@ -78,11 +73,9 @@ describe 'Playground' do
     meeting.discuss_next_topic!
 
     expect(meeting.discussion.discussing).to eq(topics[:retrospective])
-    expect(meeting.phase).to eq :discussing_topic
     
     meeting.wait_for_extension_vote!
 
-    expect(meeting.phase).to eq :waiting_for_extension_vote
 
     meeting.discuss_next_topic!
     

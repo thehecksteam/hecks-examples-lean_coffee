@@ -11,7 +11,6 @@ module LeanCoffee
             end
 
             def call
-              ExtensionTimer.start(@root)
               @root.instance_eval do
                 @phase = :discussing_topic
               end

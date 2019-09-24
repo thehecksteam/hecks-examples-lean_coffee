@@ -13,7 +13,6 @@ module LeanCoffee
 
             def call
               @meeting.instance_eval { @phase = :ordering }
-              Meeting::MeetingTimer.start(@meeting.timebox.ordering_duration, @meeting)
               self
             end
           end

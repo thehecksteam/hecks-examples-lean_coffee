@@ -59,12 +59,6 @@ describe LeanCoffee::Domain::Meetings::Meeting do
       meeting.start_collecting!
       expect(meeting.phase).to eq :collecting
     end
-
-    it 'ends the phase' do
-      meeting.start_collecting!
-      sleep(0.001)
-      expect(meeting.phase).to eq :waiting
-    end
   end
 
   describe '#start_voting' do

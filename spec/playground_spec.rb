@@ -1,9 +1,6 @@
 require 'spec_helper'
 
 describe 'Playground' do
-
-
-
   let(:meeting) do
     LeanCoffee::Domain::Meetings::Meeting.example(
       participants: [chris, angie]
@@ -43,10 +40,7 @@ describe 'Playground' do
     meeting.start_collecting!
     meeting.add_topic!(topics[:lean_coffee])
     meeting.add_topic!(topics[:retrospective])
-    sleep(0.001)
-
-    expect { meeting.add_topic!(topics[:lean_coffee]) }
-      .to raise_error 'In waiting phase.'
+    meeting.wait_for_next_phase!
     expect(meeting.phase).to eq :waiting
 
     # Voting for Topics #######################
@@ -66,8 +60,6 @@ describe 'Playground' do
 
     meeting.start_ordering!
 
-    expect(meeting.phase).to eq :ordering
-
     meeting.order_by_votes!
 
     expect(meeting.discussion.topics.first).to eq topics[:retrospective]
@@ -83,17 +75,12 @@ describe 'Playground' do
     # Discussing #######################
 
     meeting.start_discussing!
-
-    expect(meeting.phase).to eq :discussing
-
     meeting.discuss_next_topic!
 
     expect(meeting.discussion.discussing).to eq(topics[:retrospective])
     expect(meeting.phase).to eq :discussing_topic
-    expect { meeting.vote!(topic: topics[:lean_coffee], participant: chris) }
-      .to raise_error 'In discussing_topic phase.'
-
-    sleep(0.1)
+    
+    meeting.wait_for_extension_vote!
 
     expect(meeting.phase).to eq :waiting_for_extension_vote
 
@@ -101,25 +88,18 @@ describe 'Playground' do
     
     expect(meeting.discussion.discussing).to eq(topics[:lean_coffee])
 
-    sleep(0.001)
 
     # Keep Talking #######################
 
-    expect(meeting.phase).to eq(:waiting_for_extension_vote)
+    meeting.wait_for_extension_vote!
 
     meeting.vote_to_keep_talking!(participant: angie)
     meeting.vote_to_stop_talking!(participant: chris)
 
-    # expect { meeting.vote_to_keep_talking!(participant: angie) }.to raise_error('Angie voted for the same topic twice!')
-
     meeting.keep_talking!
-
-    expect { meeting.discuss_next_topic! }.to raise_error "In discussing_topic phase."
-
-    sleep(0.001)
+    meeting.wait_for_extension_vote!
 
     # Stop Talking #######################
-    expect(meeting.phase).to eq :waiting_for_extension_vote
 
     meeting.vote_to_stop_talking!(participant: chris)
     meeting.vote_to_stop_talking!(participant: angie)

@@ -12,8 +12,6 @@ module LeanCoffee
             end
 
             def call
-              TopicDiscussionTimer.start(@meeting)
-
               @root.discussion.instance_eval do
                 @discussed << @discussing if @discussing
                 @topics.compact!

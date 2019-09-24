@@ -21,6 +21,10 @@ module LeanCoffee
             instance.create(discussion)
           end
 
+          def self.all
+            @objects.values
+          end
+
           def create(discussion)
             klass = self.class.const_get(
               self.class.to_s.gsub('::Repository', '')

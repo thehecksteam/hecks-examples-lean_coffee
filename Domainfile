@@ -1,10 +1,11 @@
 domain(:LeanCoffee) do
-  summary     'Lean Coffee'
-  description 'Collaborative, dynamic, just in time meetings'
-  version     '0.1.0'
-  authors     ['Lean Coffee Developer']
-  email       'dev@lean_coffee.com'
-  homepage    'http://www.example.com'
+  summary        'Lean Coffee'
+  description    'Collaborative, dynamic, just in time meetings'
+  version        '2'
+  authors        ['Lean Coffee Developer']
+  email          'dev@lean_coffee.com'
+  homepage       'http://www.example.com'
+  domain_version '0.1.0'
 
   aggregate :Users do
     root(:User) do

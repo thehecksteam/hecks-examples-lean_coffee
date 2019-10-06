@@ -23,8 +23,8 @@ module LeanCoffee
               Discussion.new(
                 args.merge(
                   discussing: Discussion.build(args[:discussing]),
-                  discussed: Discussion.build(args[:discussed]),
-                  topics: Topic.build(args[:topics]),
+                  discussed: Discussion.build(args[:discussed] || []),
+                  topics: Topic.build(args[:topics] || []),
                 )
               )
             end

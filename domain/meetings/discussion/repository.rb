@@ -22,6 +22,10 @@ module LeanCoffee
           end
 
           def self.all
+            instance.all
+          end
+
+          def all
             @objects.values
           end
 
@@ -29,7 +33,7 @@ module LeanCoffee
             klass = self.class.const_get(
               self.class.to_s.gsub('::Repository', '')
             )
-            domain_object = klass.default(discussion)
+            domain_object = klass.build(discussion)
             domain_object.tap(&:save)
           end
 

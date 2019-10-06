@@ -22,7 +22,7 @@ module LeanCoffee
             def self.new_domain_object(args)
               Meeting.new(
                 args.merge(
-                  participants: Participant.build(args[:participants]),
+                  participants: Participant.build(args[:participants] || []),
                   discussion: Discussion.build(args[:discussion]),
                   timebox: Timebox.build(args[:timebox]),
                 )

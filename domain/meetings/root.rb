@@ -14,4 +14,3 @@ module LeanCoffee
     end
   end
 end
-

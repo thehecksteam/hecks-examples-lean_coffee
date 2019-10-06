@@ -2,7 +2,7 @@ Dir[File.dirname(__FILE__) + '/subscribers/*.rb'].each { |file| require_relative
 module LeanCoffee
   module Domain
     module Meetings
-      class Meeting
+      class Discussion
         module Subscribers
         end
       end

@@ -9,7 +9,6 @@ module LeanCoffee
             end
 
             def self.notify(event)
-              # require 'pry'; binding.pry
               return unless event.root
               return unless event.root.class == LeanCoffee::Domain::Meetings::Meeting
 

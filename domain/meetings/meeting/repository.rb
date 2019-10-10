@@ -25,8 +25,16 @@ module LeanCoffee
             instance.all
           end
 
+          def self.destroy(meeting)
+            instance.destroy(meeting)
+          end
+
           def all
             @objects.values
+          end
+
+          def destroy(meeting)
+            @objects.delete(meeting.id)
           end
 
           def create(meeting)
